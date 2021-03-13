@@ -1,9 +1,11 @@
-import '../assets/css/DevrInformations.css';
-import Button from '@material-ui/core/Button';
-import ButtonGroup from '@material-ui/core/ButtonGroup';
-import GitHubIcon from '@material-ui/icons/GitHub';
-import MailIcon from '@material-ui/icons/Mail';
-import LinkedInIcon from '@material-ui/icons/LinkedIn';
+import React from "react";
+
+import "../assets/css/DevrInformations.css";
+import Button from "@material-ui/core/Button";
+import ButtonGroup from "@material-ui/core/ButtonGroup";
+import GitHubIcon from "@material-ui/icons/GitHub";
+import MailIcon from "@material-ui/icons/Mail";
+import LinkedInIcon from "@material-ui/icons/LinkedIn";
 
 function DevrInformations() {
   return (
@@ -26,7 +28,7 @@ function DevrInformations() {
          </Button>
       </ButtonGroup>
     </header>
-  )
+  );
 }
 
 export default DevrInformations;

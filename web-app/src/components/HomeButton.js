@@ -1,5 +1,7 @@
-import HomeIcon from '@material-ui/icons/Home';
-import Button from '@material-ui/core/Button';
+import React from "react";
+
+import HomeIcon from "@material-ui/icons/Home";
+import Button from "@material-ui/core/Button";
 
 function HomeButton() {
   return (

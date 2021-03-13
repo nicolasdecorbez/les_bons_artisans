@@ -1,26 +1,26 @@
-import '../assets/css/Product.css';
-import axios from 'axios';
+import "../assets/css/Product.css";
+import axios from "axios";
 
-import HomeButton from './HomeButton'
+import HomeButton from "./HomeButton";
 
-import React, { Component } from 'react'
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-import Button from '@material-ui/core/Button';
+import React, { Component } from "react";
+import Card from "@material-ui/core/Card";
+import CardActions from "@material-ui/core/CardActions";
+import CardContent from "@material-ui/core/CardContent";
+import Grid from "@material-ui/core/Grid";
+import Typography from "@material-ui/core/Typography";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Checkbox from "@material-ui/core/Checkbox";
+import Button from "@material-ui/core/Button";
 
-import TextField from '@material-ui/core/TextField'
+import TextField from "@material-ui/core/TextField";
 
 class CreateProduct extends Component {
 
   state = {
     product_id: 0,
-    name: '',
-    type:'',
+    name: "",
+    type:"",
     price: 0,
     rating: 0,
     warranty_years: 0,
@@ -39,12 +39,12 @@ class CreateProduct extends Component {
       this.setState({
         ...this.state,
         [name]: false
-      })
+      });
     } else {
       this.setState({
         ...this.state,
         [name]: true
-      })
+      });
     }
   }
 
@@ -61,11 +61,11 @@ class CreateProduct extends Component {
       warranty_years: this.state.warranty_years,
       available: this.state.available};
 
-    axios.post(`http://localhost:8080/api/products`, { toInsert })
+    axios.post("http://localhost:8080/api/products", { toInsert })
       .then(res => {
         console.log(res);
         console.log(res.data);
-      })
+      });
   }
 
   render() {
@@ -77,7 +77,7 @@ class CreateProduct extends Component {
           <Card>
             <CardContent>
               <Typography variant="h4" gutterBottom>
-                Création d'un produit
+                Creation of a product
               </Typography>
               <form>
                 <Grid container spacing={2}>
@@ -85,7 +85,7 @@ class CreateProduct extends Component {
                     <TextField label="Product ID"
                                type="number"
                                value={product_id}
-                               onChange={this.handleChange('product_id')}
+                               onChange={this.handleChange("product_id")}
                                required
                     />
                   </Grid>
@@ -93,7 +93,7 @@ class CreateProduct extends Component {
                     <TextField label="Name"
                                type="string"
                                value={name}
-                               onChange={this.handleChange('name')}
+                               onChange={this.handleChange("name")}
                                required
                     />
                   </Grid>
@@ -101,7 +101,7 @@ class CreateProduct extends Component {
                     <TextField label="Type"
                                type="string"
                                value={type}
-                               onChange={this.handleChange('type')}
+                               onChange={this.handleChange("type")}
                                required
                     />
                   </Grid>
@@ -109,7 +109,7 @@ class CreateProduct extends Component {
                     <TextField label="Price"
                                type="number"
                                value={price}
-                               onChange={this.handleChange('price')}
+                               onChange={this.handleChange("price")}
                                required
                     />
                   </Grid>
@@ -117,7 +117,7 @@ class CreateProduct extends Component {
                     <TextField label="Rating"
                                type="number"
                                value={rating}
-                               onChange={this.handleChange('rating')}
+                               onChange={this.handleChange("rating")}
                                required
                     />
                   </Grid>
@@ -125,12 +125,12 @@ class CreateProduct extends Component {
                     <TextField label="Warranty"
                                type="number"
                                value={warranty_years}
-                               onChange={this.handleChange('warranty_years')}
+                               onChange={this.handleChange("warranty_years")}
                                required
                     />
                   </Grid>
                   <Grid item xs={12}>
-                    <FormControlLabel control={<Checkbox value={available} onChange={this.handleCheck('available')}/>}
+                    <FormControlLabel control={<Checkbox value={available} onChange={this.handleCheck("available")}/>}
                                       label="Available ?"
                     />
                   </Grid>

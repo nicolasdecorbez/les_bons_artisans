@@ -1,5 +1,6 @@
-import Navigation from './Navigation';
-import Titre from'./Titre';
+import React from "react";
+import Navigation from "./Navigation";
+import Titre from"./Titre";
 
 function Home() {
   return (

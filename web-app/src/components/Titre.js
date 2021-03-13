@@ -1,4 +1,5 @@
-import '../assets/css/Titre.css';
+import React from "react";
+import "../assets/css/Titre.css";
 
 function Titre() {
   return (

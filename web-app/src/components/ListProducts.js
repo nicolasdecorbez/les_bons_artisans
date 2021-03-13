@@ -1,16 +1,16 @@
-import React, { Component } from 'react'
-import axios from 'axios';
+import React, { Component } from "react";
+import axios from "axios";
 
-import '../assets/css/ListProducts.css';
-import HomeButton from './HomeButton'
+import "../assets/css/ListProducts.css";
+import HomeButton from "./HomeButton";
 
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
+import Table from "@material-ui/core/Table";
+import TableBody from "@material-ui/core/TableBody";
+import TableCell from "@material-ui/core/TableCell";
+import TableContainer from "@material-ui/core/TableContainer";
+import TableHead from "@material-ui/core/TableHead";
+import TableRow from "@material-ui/core/TableRow";
+import Paper from "@material-ui/core/Paper";
 
 class ListProducts extends Component {
   state = {
@@ -18,16 +18,15 @@ class ListProducts extends Component {
   }
 
   componentDidMount() {
-    axios.get(`http://localhost:8080/api/products`)
+    axios.get("http://localhost:8080/api/products")
       .then(res => {
         const products = res.data;
         this.setState({ products });
-      })
+      });
   }
 
   render() {
     const products = this.state.products;
-    console.log(products);
     return (
       <div className="List-root">
         <div className="List-container">
