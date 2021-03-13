@@ -1,0 +1,12 @@
+.List-root {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.List-container {
+  width: 100vh;
+  flex: 1;
+  margin: 50px;
+}

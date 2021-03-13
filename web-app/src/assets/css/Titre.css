@@ -1,0 +1,29 @@
+.Titre-title {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.Titre-title h1 {
+  font-size: 4em;
+  margin-bottom: 0;
+}
+
+.Titre-title h3 {
+  margin-top: 0;
+  font-size: 2em;
+  color: #757DE8;
+}
+
+.Titre-title h4 {
+  margin-top: 20px;
+  margin-bottom: 5px;
+  font-size: 1.5em;
+}
+
+.Titre-title p {
+  margin-top: 0;
+  font-size: 1em;
+}

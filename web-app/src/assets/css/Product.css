@@ -1,0 +1,16 @@
+.Prod-root {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.Prod-container {
+  width: 100vh;
+  flex: 1;
+  margin: 50px;
+}
+
+.Prod-head {
+  margin-bottom: 20px;
+}
