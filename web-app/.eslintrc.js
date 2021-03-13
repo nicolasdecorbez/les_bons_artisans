@@ -20,6 +20,6 @@ module.exports = {
     ],
     "rules": {
       "semi": ["error", "always"],
-      "quotes": ["error", "simple", { "avoidEscape": true }]
+      "quotes": ["error", "double"]
     }
 };
