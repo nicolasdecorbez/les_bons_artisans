@@ -1,13 +1,13 @@
 // Mise en place du framework express
 const express = require('express')
-
 // Mise en place de Mongoose (MongoDB)
 const mongoose = require('mongoose')
-const dbName = 'lba-db'
-const url = 'mongodb://localhost:27017/' + dbName
 
 // Importation de nos routes
 const routes = require('./routes')
+
+const dbName = 'lba-db'
+const url = 'mongodb://localhost:27017/' + dbName
 
 // Connexion à MongoDB
 mongoose

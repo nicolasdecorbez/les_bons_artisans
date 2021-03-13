@@ -1,14 +1,20 @@
 const express = require('express')
+const cors = require('cors')
 const router = express.Router()
 
 const Products = require('./models/Products')
 
-router.get('/products', async (req,res) => {
+var corsOptions = {
+  origin: "*",
+  methods: "GET,PATCH,POST,DELETE"
+}
+
+router.get('/products', cors(corsOptions), async (req,res) => {
   const prods = await Products.find()
   res.status(200).send(prods)
 })
 
-router.get('/products/:id', async (req,res) => {
+router.get('/products/:id', cors(corsOptions), async (req,res) => {
   const p_id = parseInt(req.params.id)
   try {
     const prod = await Products.findOne({ product_id: p_id })
@@ -18,7 +24,7 @@ router.get('/products/:id', async (req,res) => {
   }
 })
 
-router.post('/products', async (req,res) => {
+router.post('/products', cors(corsOptions), async (req,res) => {
   const prod = new Products({
     product_id: req.query.pid,
     name: req.query.name,
@@ -33,7 +39,7 @@ router.post('/products', async (req,res) => {
   res.status(201).send(prod)
 })
 
-router.patch('/products/:id', async (req,res) => {
+router.patch('/products/:id', cors(corsOptions), async (req,res) => {
   const p_id = parseInt(req.params.id)
 
   try {
@@ -70,7 +76,7 @@ router.patch('/products/:id', async (req,res) => {
   }
 })
 
-router.delete('/products/:id', async (req,res) => {
+router.delete('/products/:id', cors(corsOptions), async (req,res) => {
   const p_id = parseInt(req.params.id)
 
   try {
