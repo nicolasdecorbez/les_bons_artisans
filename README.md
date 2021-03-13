@@ -67,7 +67,7 @@ Notre API tourne maintenant à l'adresse `localhost:8080`. Nous ouvrons maintena
 
 Nous nous rendons dans le dossier `/web-app` et lançons la commande `yarn start`. La page d'accueil devrait se lancer automatiquement, arrivant donc sur cette page:
 
-![](/img/main_page)
+![](/img/main_page.png)
 
 L'ensemble du projet est conforme à la norme du linter [ESLint](https://eslint.org/), implémenté de base dans ce projet.
 
