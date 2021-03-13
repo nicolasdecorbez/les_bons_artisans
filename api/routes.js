@@ -1,30 +1,30 @@
-const express = require('express')
-const cors = require('cors')
-const router = express.Router()
+const express = require("express");
+const cors = require("cors");
+const router = express.Router();
 
-const Products = require('./models/Products')
+const Products = require("./models/Products");
 
 var corsOptions = {
   origin: "*",
   methods: "GET,PATCH,POST,DELETE"
-}
+};
 
-router.get('/products', cors(corsOptions), async (req,res) => {
-  const prods = await Products.find()
-  res.status(200).send(prods)
-})
+router.get("/products", cors(corsOptions), async (req,res) => {
+  const prods = await Products.find();
+  res.status(200).send(prods);
+});
 
-router.get('/products/:id', cors(corsOptions), async (req,res) => {
-  const p_id = parseInt(req.params.id)
+router.get("/products/:id", cors(corsOptions), async (req,res) => {
+  const p_id = parseInt(req.params.id);
   try {
-    const prod = await Products.findOne({ product_id: p_id })
-    res.status(200).send(prod)
+    const prod = await Products.findOne({ product_id: p_id });
+    res.status(200).send(prod);
   } catch {
-    res.status(404).send({ error: "Product doesn't exist!" })
+    res.status(404).send({ error: "Product doesn't exist!" });
   }
-})
+});
 
-router.post('/products', cors(corsOptions), async (req,res) => {
+router.post("/products", cors(corsOptions), async (req,res) => {
   const prod = new Products({
     product_id: req.query.pid,
     name: req.query.name,
@@ -32,61 +32,61 @@ router.post('/products', cors(corsOptions), async (req,res) => {
     price: parseFloat(req.query.price),
     rating: parseFloat(req.query.rating),
     warranty_years: parseInt(req.query.warranty_years),
-    available: (req.query.available === 'true')
-  })
+    available: (req.query.available === "true")
+  });
 
-  await prod.save()
-  res.status(201).send(prod)
-})
+  await prod.save();
+  res.status(201).send(prod);
+});
 
-router.patch('/products/:id', cors(corsOptions), async (req,res) => {
-  const p_id = parseInt(req.params.id)
+router.patch("/products/:id", cors(corsOptions), async (req,res) => {
+  const p_id = parseInt(req.params.id);
 
   try {
-    const prod = await Products.findOne({ product_id: p_id })
+    const prod = await Products.findOne({ product_id: p_id });
 
     if (req.query.name) {
-      prod.name = req.query.name
+      prod.name = req.query.name;
     }
 
     if (req.query.type) {
-      prod.type = req.query.type
+      prod.type = req.query.type;
     }
 
     if (req.query.price) {
-      prod.price = req.query.price
+      prod.price = req.query.price;
     }
 
     if (req.query.rating) {
-      prod.rating = req.query.rating
+      prod.rating = req.query.rating;
     }
 
     if (req.query.warranty_years) {
-      prod.warranty_years = req.query.warranty_years
+      prod.warranty_years = req.query.warranty_years;
     }
 
     if (req.query.available) {
-      prod.available = req.query.available
+      prod.available = req.query.available;
     }
 
-    await prod.save()
-    res.status(200).send(prod)
+    await prod.save();
+    res.status(200).send(prod);
   } catch {
-    res.status(404).send({ error: "Product doesn't exist!" })
+    res.status(404).send({ error: "Product doesn't exist!" });
   }
-})
+});
 
-router.delete('/products/:id', cors(corsOptions), async (req,res) => {
-  const p_id = parseInt(req.params.id)
+router.delete("/products/:id", cors(corsOptions), async (req,res) => {
+  const p_id = parseInt(req.params.id);
 
   try {
-    await Products.deleteOne({ product_id: p_id })
+    await Products.deleteOne({ product_id: p_id });
     res.status(204).send();
   } catch {
-    res.status(404).send({ error: "Product doesn't exist!" })
+    res.status(404).send({ error: "Product doesn't exist!" });
   }
-})
+});
 
 
 
-module.exports = router
+module.exports = router;

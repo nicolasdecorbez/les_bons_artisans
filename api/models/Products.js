@@ -1,4 +1,4 @@
-const mongoose = require('mongoose')
+const mongoose = require("mongoose");
 
 const prodSchema = mongoose.Schema({
   product_id: {
@@ -11,6 +11,6 @@ const prodSchema = mongoose.Schema({
   rating: Number,
   warranty_years: Number,
   available: Boolean
-}, { collection: 'produits'})
+}, { collection: "produits"});
 
-module.exports = mongoose.model("Products", prodSchema)
+module.exports = mongoose.model("Products", prodSchema);
