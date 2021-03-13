@@ -10,22 +10,22 @@ var corsOptions = {
 };
 
 router.get("/products", cors(corsOptions), async (req,res) => {
-  const prods = await Products.find();
-  res.status(200).send(prods);
+  const products = await Products.find();
+  res.status(200).send(products);
 });
 
 router.get("/products/:id", cors(corsOptions), async (req,res) => {
-  const p_id = parseInt(req.params.id);
+  const product_id = parseInt(req.params.id);
   try {
-    const prod = await Products.findOne({ product_id: p_id });
-    res.status(200).send(prod);
+    const product = await Products.findOne({ product_id: product_id });
+    res.status(200).send(product);
   } catch {
     res.status(404).send({ error: "Product doesn't exist!" });
   }
 });
 
 router.post("/products", cors(corsOptions), async (req,res) => {
-  const prod = new Products({
+  const product = new Products({
     product_id: req.query.pid,
     name: req.query.name,
     type: req.query.type,
@@ -35,52 +35,52 @@ router.post("/products", cors(corsOptions), async (req,res) => {
     available: (req.query.available === "true")
   });
 
-  await prod.save();
-  res.status(201).send(prod);
+  await product.save();
+  res.status(201).send(product);
 });
 
 router.patch("/products/:id", cors(corsOptions), async (req,res) => {
-  const p_id = parseInt(req.params.id);
+  const product_id = parseInt(req.params.id);
 
   try {
-    const prod = await Products.findOne({ product_id: p_id });
+    const product = await Products.findOne({ product_id: product_id });
 
     if (req.query.name) {
-      prod.name = req.query.name;
+      product.name = req.query.name;
     }
 
     if (req.query.type) {
-      prod.type = req.query.type;
+      product.type = req.query.type;
     }
 
     if (req.query.price) {
-      prod.price = req.query.price;
+      product.price = req.query.price;
     }
 
     if (req.query.rating) {
-      prod.rating = req.query.rating;
+      product.rating = req.query.rating;
     }
 
     if (req.query.warranty_years) {
-      prod.warranty_years = req.query.warranty_years;
+      product.warranty_years = req.query.warranty_years;
     }
 
     if (req.query.available) {
-      prod.available = req.query.available;
+      product.available = req.query.available;
     }
 
-    await prod.save();
-    res.status(200).send(prod);
+    await product.save();
+    res.status(200).send(product);
   } catch {
     res.status(404).send({ error: "Product doesn't exist!" });
   }
 });
 
 router.delete("/products/:id", cors(corsOptions), async (req,res) => {
-  const p_id = parseInt(req.params.id);
+  const product_id = parseInt(req.params.id);
 
   try {
-    await Products.deleteOne({ product_id: p_id });
+    await Products.deleteOne({ product_id: product_id });
     res.status(204).send();
   } catch {
     res.status(404).send({ error: "Product doesn't exist!" });
