@@ -1,39 +1,51 @@
 const express = require("express");
 const router = express.Router();
 
+// HTTP Response codes
+const HTTP_OK = 200;
+const HTTP_CREATED = 201;
+const HTTP_NO_CONTENT = 204;
+
 const Products = require("./models/Products");
 
+
+
 router.get("/products", async (req,res) => {
-  const products = await Products.find();
-  res.status(200).send(products);
+  try {
+    const products = await Products.find();
+    res.status(HTTP_OK).send(products);
+  } catch (err) {
+    res.send(err);
+  }
 });
 
 router.get("/products/:id", async (req,res) => {
   const product_id = parseInt(req.params.id);
   try {
     const product = await Products.findOne({ product_id: product_id });
-    res.status(200).send(product);
-  } catch {
-    res.status(404).send({ error: "Product doesn't exist!" });
+    res.status(HTTP_OK).send(product);
+  } catch (err) {
+    res.send(err);
   }
 });
 
 router.post("/products", async (req,res) => {
+  try {
+    const product = new Products({
+      product_id: req.body.toInsert.product_id,
+      name: req.body.toInsert.name,
+      type: req.body.toInsert.type,
+      price: req.body.toInsert.price,
+      rating: req.body.toInsert.rating,
+      warranty_years: req.body.toInsert.warranty_years,
+      available: req.body.toInsert.available
+    });
 
-  const product = new Products({
-    product_id: req.body.toInsert.product_id,
-    name: req.body.toInsert.name,
-    type: req.body.toInsert.type,
-    price: req.body.toInsert.price,
-    rating: req.body.toInsert.rating,
-    warranty_years: req.body.toInsert.warranty_years,
-    available: req.body.toInsert.available
-  });
-
-  console.log(product);
-
-  await product.save();
-  res.status(201).send(product);
+    await product.save();
+    res.status(HTTP_CREATED).send(product);
+  } catch (err) {
+    res.send(err);
+  }
 });
 
 router.patch("/products/:id", async (req,res) => {
@@ -65,9 +77,9 @@ router.patch("/products/:id", async (req,res) => {
     product.available=req.body.toInsert.available;
 
     await product.save();
-    res.status(200).send(product);
-  } catch {
-    res.status(404).send({ error: "Product doesn't exist!" });
+    res.status(HTTP_OK).send(product);
+  } catch (err) {
+    res.send(err);
   }
 });
 
@@ -76,11 +88,10 @@ router.delete("/products/:id", async (req,res) => {
 
   try {
     await Products.deleteOne({ product_id: product_id });
-    res.status(204).send();
-  } catch {
-    res.status(404).send({ error: "Product doesn't exist!" });
+    res.status(HTTP_NO_CONTENT).send();
+  } catch (err) {
+    res.send(err);
   }
 });
-
 
 module.exports = router;

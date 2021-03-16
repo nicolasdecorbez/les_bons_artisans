@@ -8,11 +8,11 @@ const routes = require("./routes");
 const cors = require("cors");
 
 const dbName = "lba-db";
-const url = "mongodb://localhost:27017/" + dbName;
+const DATABASE_URL = process.env["DATABASE_URL"] || "mongodb://localhost:27017/" + dbName;
 
 // Connexion à MongoDB
 mongoose
-  .connect(url, {useUnifiedTopology: true, useNewUrlParser: true})
+  .connect(DATABASE_URL, {useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true})
   .then(() => {
       const app = express();
 
