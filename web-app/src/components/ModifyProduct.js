@@ -99,7 +99,7 @@ class ModifyProduct extends Component {
               <Typography variant="h4" gutterBottom>
                 Modification of a product
               </Typography>
-              <Typography variant="p" mb={10}>
+              <Typography mb={10}>
                 First enter a product_id, then click on Get Informations before modifications.
               </Typography>
             </div>
