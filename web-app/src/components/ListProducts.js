@@ -22,6 +22,8 @@ class ListProducts extends Component {
       .then(res => {
         const products = res.data;
         this.setState({ products });
+      }).catch(error => {
+        console.log(error);
       });
   }
 

@@ -1,92 +1,97 @@
 const express = require("express");
-const cors = require("cors");
 const router = express.Router();
+
+// HTTP Response codes
+const HTTP_OK = 200;
+const HTTP_CREATED = 201;
+const HTTP_NO_CONTENT = 204;
 
 const Products = require("./models/Products");
 
-var corsOptions = {
-  origin: "*",
-  methods: "GET,PATCH,POST,DELETE"
-};
 
-router.get("/products", cors(corsOptions), async (req,res) => {
-  const products = await Products.find();
-  res.status(200).send(products);
-});
 
-router.get("/products/:id", cors(corsOptions), async (req,res) => {
-  const product_id = parseInt(req.params.id);
+router.get("/products", async (req,res) => {
   try {
-    const product = await Products.findOne({ product_id: product_id });
-    res.status(200).send(product);
-  } catch {
-    res.status(404).send({ error: "Product doesn't exist!" });
+    const products = await Products.find();
+    res.status(HTTP_OK).send(products);
+  } catch (err) {
+    res.send(err);
   }
 });
 
-router.post("/products", cors(corsOptions), async (req,res) => {
-  const product = new Products({
-    product_id: req.query.pid,
-    name: req.query.name,
-    type: req.query.type,
-    price: parseFloat(req.query.price),
-    rating: parseFloat(req.query.rating),
-    warranty_years: parseInt(req.query.warranty_years),
-    available: (req.query.available === "true")
-  });
-
-  await product.save();
-  res.status(201).send(product);
-});
-
-router.patch("/products/:id", cors(corsOptions), async (req,res) => {
+router.get("/products/:id", async (req,res) => {
   const product_id = parseInt(req.params.id);
-
   try {
     const product = await Products.findOne({ product_id: product_id });
+    res.status(HTTP_OK).send(product);
+  } catch (err) {
+    res.send(err);
+  }
+});
 
-    if (req.query.name) {
-      product.name = req.query.name;
-    }
-
-    if (req.query.type) {
-      product.type = req.query.type;
-    }
-
-    if (req.query.price) {
-      product.price = req.query.price;
-    }
-
-    if (req.query.rating) {
-      product.rating = req.query.rating;
-    }
-
-    if (req.query.warranty_years) {
-      product.warranty_years = req.query.warranty_years;
-    }
-
-    if (req.query.available) {
-      product.available = req.query.available;
-    }
+router.post("/products", async (req,res) => {
+  try {
+    const product = new Products({
+      product_id: req.body.toInsert.product_id,
+      name: req.body.toInsert.name,
+      type: req.body.toInsert.type,
+      price: req.body.toInsert.price,
+      rating: req.body.toInsert.rating,
+      warranty_years: req.body.toInsert.warranty_years,
+      available: req.body.toInsert.available
+    });
 
     await product.save();
-    res.status(200).send(product);
-  } catch {
-    res.status(404).send({ error: "Product doesn't exist!" });
+    res.status(HTTP_CREATED).send(product);
+  } catch (err) {
+    res.send(err);
   }
 });
 
-router.delete("/products/:id", cors(corsOptions), async (req,res) => {
+router.patch("/products/:id", async (req,res) => {
+  const product_id = parseInt(req.params.id);
+
+  try {
+    const product = await Products.findOne({ product_id: product_id });
+
+    if (req.body.toInsert.name != "") {
+      product.name=req.body.toInsert.name;
+    }
+
+    if (req.body.toInsert.type != "") {
+      product.type=req.body.toInsert.type;
+    }
+
+    if (req.body.toInsert.price != 0) {
+      product.price=req.body.toInsert.price;
+    }
+
+    if (req.body.toInsert.rating != 0) {
+      product.rating=req.body.toInsert.rating;
+    }
+
+    if (req.body.toInsert.warranty_years != 0) {
+      product.warranty_years=req.body.toInsert.warranty_years;
+    }
+
+    product.available=req.body.toInsert.available;
+
+    await product.save();
+    res.status(HTTP_OK).send(product);
+  } catch (err) {
+    res.send(err);
+  }
+});
+
+router.delete("/products/:id", async (req,res) => {
   const product_id = parseInt(req.params.id);
 
   try {
     await Products.deleteOne({ product_id: product_id });
-    res.status(204).send();
-  } catch {
-    res.status(404).send({ error: "Product doesn't exist!" });
+    res.status(HTTP_NO_CONTENT).send();
+  } catch (err) {
+    res.send(err);
   }
 });
-
-
 
 module.exports = router;
