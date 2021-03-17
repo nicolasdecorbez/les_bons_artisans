@@ -73,4 +73,4 @@ L'ensemble du projet est conforme à la norme du linter [ESLint](https://eslint.
 
 ## Problèmes rencontrés
 
-Malgré l'intégration des headers CORS à l'ensemble de mes requêtes HTTP, seulement les méthodes **GET** sont compatible avec notre `web-app`. En revanche, l'intégralité des routes est compatibles avec [Postman](https://www.postman.com/)
+~~Malgré l'intégration des headers CORS à l'ensemble de mes requêtes HTTP, seulement les méthodes **GET** sont compatible avec notre `web-app`. En revanche, l'intégralité des routes est compatibles avec [Postman](https://www.postman.com/).~~ -> Fixed
