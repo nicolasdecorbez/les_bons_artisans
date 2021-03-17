@@ -49,26 +49,29 @@ class DeleteProduct extends Component {
             warranty_years: 0,
             available: false
           });
+        }).catch(error => {
+          console.log(error);
         });
     }
   }
 
   handleGetProduct = event => {
     event.preventDefault();
-    if (this.state.product_id > 0) {
-      axios.get("http://localhost:8080/api/products/" + this.state.product_id)
-        .then(res => {
-          this.setState({
-            ...this.state,
-            name: res.data.name,
-            type: res.data.type,
-            price: res.data.price,
-            rating: res.data.rating,
-            warranty_years: res.data.warranty_years,
-            available: res.data.available,
-          });
+    axios.get("http://localhost:8080/api/products/" + this.state.product_id).then(res => {
+      if (res.data.name) {
+        this.setState({
+          ...this.state,
+          name: res.data.name,
+          type: res.data.type,
+          price: res.data.price,
+          rating: res.data.rating,
+          warranty_years: res.data.warranty_years,
+          available: res.data.available,
         });
-    }
+      }
+    }).catch(error => {
+      console.log(error);
+    });
   }
 
   handleChange = name => ({ target: { value } }) => {
@@ -91,18 +94,18 @@ class DeleteProduct extends Component {
               <Typography variant="h4" gutterBottom>
                 Deletion of a product
               </Typography>
-              <Typography variant="p" mb={10}>
-                First enter a product_id, then click on Get Informations before deleting it. 
+              <Typography mb={10}>
+                First enter a product_id, then click on Get Informations before deleting it.
               </Typography>
             </div>
-            <forms>
+            <form>
               <TextField label="Product ID"
                          type="number"
                          value={product_id}
                          onChange={this.handleChange("product_id")}
                          required
               />
-            </forms>
+            </form>
             <TableContainer component={Paper}>
               <Table aria-label="get-all-products">
                 <TableHead>

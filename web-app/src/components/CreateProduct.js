@@ -64,7 +64,10 @@ class CreateProduct extends Component {
     axios.post("http://localhost:8080/api/products", { toInsert })
       .then(res => {
         console.log(res);
-        console.log(res.data);
+        window.alert("Product add");
+      }).catch(error => {
+        console.log(error);
+        window.alert("Product add");
       });
   }
 
